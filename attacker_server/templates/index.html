@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stolen Cookies - Attacker Console</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+        }
+        h1 {
+            color: #FF0000;
+            text-shadow: 0 0 5px #FF0000;
+        }
+        .cookie-entry {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #00FF00;
+            padding-bottom: 5px;
+        }
+        .timestamp {
+            color: #999999;
+            font-size: 12px;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .blinker {
+            animation: blink 1s steps(2, start) infinite;
+        }
+        @keyframes blink {
+            to {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>💀 Attacker Console 💀</h1>
+        <p>Listening for incoming stolen cookies <span class="blinker">_</span></p>
+        <hr>
+    </div>
+
+    {% if cookies %}
+        {% for c in cookies %}
+            <div class="cookie-entry">
+                <div><strong>Cookie:</strong> {{ c['cookie'] }}</div>
+                <div class="timestamp">Received at: {{ c['timestamp'] }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No stolen cookies received yet...</p>
+    {% endif %}
+</body>
+</html>
