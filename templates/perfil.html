@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Perfil de {{ username }}</h2>
+<img src="{{ user['avatar'] }}" alt="Avatar" width="150" height="150">
+<h3>Publicaciones:</h3>
+<ul>
+{% for post in posts %}
+    <li><a href="{{ url_for('ver_post', post_id=post['id']) }}">{{ post['titulo'] }}</a> ({{ post['timestamp'] }})</li>
+{% endfor %}
+</ul>
+{% endblock %}

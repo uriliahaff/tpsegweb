@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'clave-super-secreta-insegura'
@@ -18,11 +19,15 @@ def cargar_usuarios():
         lines = f.readlines()
         usuarios = {}
         for line in lines:
-            print(f"DEBUG LINE: {line}")
-            username, password = line.strip().split('|')
-            usuarios[username] = password
-        print(f"DEBUG USUARIOS: {usuarios}")
+            parts = line.strip().split('|')
+            if len(parts) == 3:
+                username, password, avatar = parts
+                usuarios[username] = {'password': password, 'avatar': avatar}
+            else:
+                username, password = parts
+                usuarios[username] = {'password': password, 'avatar': '/static/default.png'}
         return usuarios
+
 
 
 def guardar_usuario(username, password):
@@ -36,13 +41,18 @@ def cargar_posts():
         lines = f.readlines()
         posts = []
         for idx, line in enumerate(lines):
-            titulo, contenido, autor = line.strip().split('|')
-            posts.append({'id': idx, 'titulo': titulo, 'contenido': contenido, 'autor': autor})
+            parts = line.strip().split('|')
+            if len(parts) != 4:
+                continue
+            titulo, contenido, autor, timestamp = parts
+            posts.append({'id': idx, 'titulo': titulo, 'contenido': contenido, 'autor': autor, 'timestamp': timestamp})
         return posts
 
+
 def guardar_post(titulo, contenido, autor):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     with open(POSTS_FILE, 'a') as f:
-        f.write(f"{titulo}|{contenido}|{autor}\n")
+        f.write(f"{titulo}|{contenido}|{autor}|{timestamp}\n")
 
 def cargar_comentarios(post_id):
     if not os.path.exists(COMMENTS_FILE):
@@ -52,16 +62,19 @@ def cargar_comentarios(post_id):
         comentarios = []
         for line in lines:
             parts = line.strip().split('|')
-            if len(parts) != 3:
-                continue  # saltar líneas mal formadas
-            pid, autor, comentario = parts
+            if len(parts) != 4:
+                continue
+            pid, autor, comentario, timestamp = parts
             if int(pid) == post_id:
-                comentarios.append({'autor': autor, 'comentario': comentario})
+                comentarios.append({'autor': autor, 'comentario': comentario, 'timestamp': timestamp})
         return comentarios
 
+
 def guardar_comentario(post_id, autor, comentario):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     with open(COMMENTS_FILE, 'a') as f:
-        f.write(f"{post_id}|{autor}|{comentario}\n")
+        f.write(f"{post_id}|{autor}|{comentario}|{timestamp}\n")
+
 
 # Rutas
 
@@ -127,6 +140,15 @@ def ver_post(post_id):
     comentarios = cargar_comentarios(post_id)
     return render_template('post.html', post=post, comentarios=comentarios)
 
+@app.route('/perfil/<username>')
+def perfil(username):
+    usuarios = cargar_usuarios()
+    user = usuarios.get(username)
+    if not user:
+        return "Usuario no encontrado", 404
+    posts = cargar_posts()
+    user_posts = [p for p in posts if p['autor'] == username]
+    return render_template('perfil.html', username=username, user=user, posts=user_posts)
 
 if __name__ == '__main__':
     if not os.path.exists(DATA_DIR):

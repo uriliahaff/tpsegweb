@@ -2,16 +2,20 @@
 {% block content %}
 <h2>{{ post['titulo'] }}</h2>
 <p>{{ post['contenido'] }}</p>
-<p><small>Publicado por <strong>{{ post['autor'] }}</strong></small></p>
+<p><small>Publicado por 
+    <a href="{{ url_for('perfil', username=post['autor']) }}">
+        {{ post['autor'] }}
+    </a> el {{ post['timestamp'] }}
+</small></p>
 
 <hr>
 <h3>Comentarios:</h3>
 {% if comentarios %}
     {% for c in comentarios %}
-        <div class="post">
-            <p>{{ c['comentario']|safe }}</p>
-            <p><small>Por {{ c['autor'] }}</small></p>
-        </div>
+ <div class="post">
+        <p>{{ c['comentario']|safe }}</p>
+        <p><small>Por <a href="{{ url_for('perfil', username=c['autor']) }}">{{ c['autor'] }}</a> el {{ c['timestamp'] }}</small></p>
+    </div>
     {% endfor %}
 {% else %}
     <p>No hay comentarios aún.</p>

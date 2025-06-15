@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Foro Nerd 2005</title>
+    <title>UTN NerdHub</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -13,6 +13,7 @@
         <a href="{{ url_for('index') }}">Inicio</a>
         {% if session.get('user') %}
             <a href="{{ url_for('new_post') }}">Nuevo Post</a>
+            <a href="{{ url_for('perfil', username=session.get('user')) }}">Perfil</a>
             <a href="{{ url_for('logout') }}">Salir ({{ session.get('user') }})</a>
         {% else %}
             <a href="{{ url_for('login') }}">Login</a>
