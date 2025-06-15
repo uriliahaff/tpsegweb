@@ -4,6 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'clave-super-secreta-insegura'
+app.config['SESSION_COOKIE_HTTPONLY'] = False
 
 DATA_DIR = 'data'
 USERS_FILE = os.path.join(DATA_DIR, 'users.txt')
@@ -99,12 +100,13 @@ def login():
         username = request.form['username']
         password = request.form['password']
         usuarios = cargar_usuarios()
-        if username in usuarios and usuarios[username] == password:
+        if username in usuarios and usuarios[username]['password'] == password:
             session['user'] = username
             return redirect(url_for('index'))
         else:
             error = 'Usuario o contraseña incorrectos'
     return render_template('login.html', error=error)
+
 
 @app.route('/logout')
 def logout():

