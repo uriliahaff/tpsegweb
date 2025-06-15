@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Foro Nerd 2005</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1 style="color: white;">UTN NerdHub - Foro Oficial de Ingeniería y Café ☕</h1>
+</header>
+    <nav>
+        <a href="{{ url_for('index') }}">Inicio</a>
+        {% if session.get('user') %}
+            <a href="{{ url_for('new_post') }}">Nuevo Post</a>
+            <a href="{{ url_for('logout') }}">Salir ({{ session.get('user') }})</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Registrarse</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        Foro Inseguro UTN 2025 - Simulación de Vulnerabilidades Web
+    </footer>
+</body>
+</html>

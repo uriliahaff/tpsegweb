@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Posts Recientes</h2>
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="post">
+            <h3><a href="{{ url_for('ver_post', post_id=post['id']) }}">{{ post['titulo'] }}</a></h3>
+            <p><small>Publicado por <strong>{{ post['autor'] }}</strong></small></p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay publicaciones todavía. Sé el primero en publicar.</p>
+{% endif %}
+{% endblock %}

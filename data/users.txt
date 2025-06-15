@@ -1,0 +1,3 @@
+admin|admin123
+fmocchetti|clave123
+uliahaff|segura456

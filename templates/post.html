@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ post['titulo'] }}</h2>
+<p>{{ post['contenido'] }}</p>
+<p><small>Publicado por <strong>{{ post['autor'] }}</strong></small></p>
+
+<hr>
+<h3>Comentarios:</h3>
+{% if comentarios %}
+    {% for c in comentarios %}
+        <div class="post">
+            <p>{{ c['comentario']|safe }}</p>
+            <p><small>Por {{ c['autor'] }}</small></p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay comentarios aún.</p>
+{% endif %}
+
+{% if session.get('user') %}
+<hr>
+<h3>Agregar Comentario:</h3>
+<form method="POST">
+    <textarea name="comentario" rows="4" required></textarea><br>
+    <input type="submit" value="Comentar">
+</form>
+{% else %}
+<p><a href="{{ url_for('login') }}">Inicia sesión</a> para comentar.</p>
+{% endif %}
+
+{% endblock %}

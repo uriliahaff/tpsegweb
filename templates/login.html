@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Ingreso al Foro</h2>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+    <label>Nombre de usuario:</label>
+    <input type="text" name="username" required>
+
+    <label>Contraseña:</label>
+    <input type="password" name="password" required>
+
+    <input type="submit" value="Entrar">
+</form>
+{% endblock %}
