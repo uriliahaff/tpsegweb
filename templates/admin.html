@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Panel de Administración</h1>
+
+<h2>Usuarios Registrados</h2>
+<ul>
+  {% for user, data in usuarios.items() %}
+    <li>{{ user }} - Avatar: <img src="{{ data.avatar }}" width="50"></li>
+  {% endfor %}
+</ul>
+
+<h2>Posts</h2>
+<ul>
+  {% for post in posts %}
+    <li>
+      <strong>{{ post.titulo }}</strong> por {{ post.autor }} ({{ post.timestamp }})
+      <form method="post" action="{{ url_for('borrar_post', post_id=post.id) }}" style="display:inline;">
+        <button type="submit">Eliminar</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
+<h2>Comentarios</h2>
+<ul>
+  {% for comentario in comentarios %}
+    <li>Post {{ comentario.pid }} - {{ comentario.autor }}: {{ comentario.comentario }} ({{ comentario.timestamp }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -76,6 +76,37 @@ def guardar_comentario(post_id, autor, comentario):
     with open(COMMENTS_FILE, 'a') as f:
         f.write(f"{post_id}|{autor}|{comentario}|{timestamp}\n")
 
+# Borrar post
+def eliminar_post(post_id):
+    posts = cargar_posts()
+    posts = [p for p in posts if p['id'] != post_id]
+    with open(POSTS_FILE, 'w') as f:
+        for p in posts:
+            f.write(f"{p['titulo']}|{p['contenido']}|{p['autor']}|{p['timestamp']}\n")
+
+# Borrar comentario
+def eliminar_comentario(post_id, autor, timestamp):
+    comentarios = cargar_comentarios(-1)  # Cargamos todos
+    comentarios = [c for c in comentarios if not (c['pid'] == post_id and c['autor'] == autor and c['timestamp'] == timestamp)]
+    with open(COMMENTS_FILE, 'w') as f:
+        for c in comentarios:
+            f.write(f"{c['pid']}|{c['autor']}|{c['comentario']}|{c['timestamp']}\n")
+
+# Cargar todos los comentarios (sin filtrar por post)
+def cargar_comentarios(post_id=None):
+    if not os.path.exists(COMMENTS_FILE):
+        return []
+    with open(COMMENTS_FILE, 'r') as f:
+        lines = f.readlines()
+        comentarios = []
+        for line in lines:
+            parts = line.strip().split('|')
+            if len(parts) != 4:
+                continue
+            pid, autor, comentario, timestamp = parts
+            if post_id is None or int(pid) == post_id:
+                comentarios.append({'pid': int(pid), 'autor': autor, 'comentario': comentario, 'timestamp': timestamp})
+        return comentarios
 
 # Rutas
 
@@ -151,6 +182,25 @@ def perfil(username):
     posts = cargar_posts()
     user_posts = [p for p in posts if p['autor'] == username]
     return render_template('perfil.html', username=username, user=user, posts=user_posts)
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin_panel():
+    if 'user' not in session or session['user'] != 'admin':
+        return "Acceso denegado", 403
+
+    usuarios = cargar_usuarios()
+    posts = cargar_posts()
+    comentarios = cargar_comentarios()
+
+    return render_template('admin.html', usuarios=usuarios, posts=posts, comentarios=comentarios)
+
+@app.route('/borrar_post/<int:post_id>', methods=['POST'])
+def borrar_post(post_id):
+    if 'user' not in session or session['user'] != 'admin':
+        return "Acceso denegado", 403
+    eliminar_post(post_id)
+    return redirect(url_for('admin_panel'))
+
 
 if __name__ == '__main__':
     if not os.path.exists(DATA_DIR):
