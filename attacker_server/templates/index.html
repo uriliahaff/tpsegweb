@@ -44,10 +44,13 @@
         .terminal {
             background-color: #001100;
             padding: 10px;
-            height: 200px;
+            height: 300px;
             overflow-y: auto;
             border: 1px solid #00FF00;
             margin-bottom: 30px;
+            box-shadow: 0 0 10px #00FF00;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .directory-listing {
@@ -105,27 +108,59 @@
         </ul>
     </div>
 
-    <script>
-        const terminal = document.getElementById('terminal');
-        const lines = [
-            ">> Establishing reverse shell...",
-            ">> Injecting JS payload...",
-            ">> Hooking DOM on victim browser...",
-            ">> Bypassing CSP...",
-            ">> Listening on port 4444...",
-            ">> Exfiltrating document.cookie...",
-            ">> Parsing cookies into memory...",
-            ">> Awaiting additional targets..."
-        ];
+<script>
+    const terminal = document.getElementById('terminal');
 
-        let i = 0;
-        setInterval(() => {
-            const line = lines[Math.floor(Math.random() * lines.length)];
-            const div = document.createElement("div");
-            div.textContent = line;
-            terminal.appendChild(div);
-            terminal.scrollTop = terminal.scrollHeight;
-        }, 1500);
-    </script>
+    const getTime = () => {
+        const now = new Date();
+        return `[${now.getHours().toString().padStart(2, '0')}:` +
+               `${now.getMinutes().toString().padStart(2, '0')}:` +
+               `${now.getSeconds().toString().padStart(2, '0')}]`;
+    };
+
+    const logLines = [
+        "Initiating protocol handshake...",
+        "Downloading payload from C2 server...",
+        "Spawning hidden process (PID 4816)...",
+        "Bypassing antivirus heuristics...",
+        "Establishing encrypted tunnel...",
+        "Enumerating subnets...",
+        "Decrypting keystroke logs...",
+        "Injecting memory stub...",
+        "Found vulnerable endpoint at /api/login",
+        "Uploading rootkit...",
+        "Shellcode executed successfully.",
+        "Leaking env variables...",
+        "Fingerprinting browser...",
+        "Running privilege escalation script...",
+        "Connected to botnet swarm.",
+        "Staging persistence module...",
+        "Writing to /etc/shadow (spoof)...",
+        "Accessing clipboard data...",
+        "Hijacking iframe events...",
+        "Creating decoy process tree...",
+        "Overwriting logs...",
+        "Sniffing credentials over HTTP...",
+        "Brute-forcing admin panel...",
+        "Mimicking user session...",
+        "Exporting AWS credentials...",
+        "Flushing DNS cache...",
+        "Mounting encrypted volume...",
+        "Pinging internal gateway...",
+        "Engaging cloaking protocol...",
+        "Session stabilized on port 1337."
+    ];
+
+    function addLog() {
+        const line = document.createElement("div");
+        const msg = logLines[Math.floor(Math.random() * logLines.length)];
+        line.innerHTML = `<span style="color:#00aa00;">${getTime()}</span> ${msg}`;
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    setInterval(addLog, 500 + Math.random() * 500); // jittered interval
+</script>
+
 </body>
 </html>
