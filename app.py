@@ -32,29 +32,50 @@ def cargar_usuarios():
 
 
 
-def guardar_usuario(username, password):
-    with open(USERS_FILE, 'a') as f:
-        f.write(f"{username}|{password}\n")
+def guardar_usuario(username, password, profile_url):
+    with open(USERS_FILE, 'a', encoding='utf-8') as f:
+        f.write(f"{username}|{password}|{profile_url}\n")
+        
+def usuario_existe(username):
+    try:
+        with open(USERS_FILE, 'r', encoding='utf-8') as f:
+            for line in f:
+                parts = line.strip().split('|')
+                if parts and parts[0] == username:
+                    return True
+    except FileNotFoundError:
+        pass
+    return False
+
 
 def cargar_posts():
     if not os.path.exists(POSTS_FILE):
         return []
-    with open(POSTS_FILE, 'r') as f:
+    with open(POSTS_FILE, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         posts = []
         for idx, line in enumerate(lines):
             parts = line.strip().split('|')
-            if len(parts) != 4:
-                continue
-            titulo, contenido, autor, timestamp = parts
-            posts.append({'id': idx, 'titulo': titulo, 'contenido': contenido, 'autor': autor, 'timestamp': timestamp})
+            if len(parts) != 5:
+                continue  # skip malformed lines
+            titulo, contenido, autor, timestamp, carrera = parts
+            posts.append({
+                'id': idx,
+                'titulo': titulo,
+                'contenido': contenido,
+                'autor': autor,
+                'timestamp': timestamp,
+                'carrera': carrera
+            })
         return posts
 
 
-def guardar_post(titulo, contenido, autor):
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    with open(POSTS_FILE, 'a') as f:
-        f.write(f"{titulo}|{contenido}|{autor}|{timestamp}\n")
+def guardar_post(titulo, contenido, autor, carrera):
+    fecha = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"Guardando post: {titulo}, {autor}, {fecha}, {carrera}")
+    with open('data/posts.txt', 'a', encoding='utf-8') as f:
+        f.write(f"{titulo}|{contenido}|{autor}|{fecha}|{carrera}\n")
+
 
 def cargar_comentarios(post_id):
     if not os.path.exists(COMMENTS_FILE):
@@ -109,6 +130,21 @@ def cargar_comentarios(post_id=None):
                 comentarios.append({'pid': int(pid), 'autor': autor, 'comentario': comentario, 'timestamp': timestamp})
         return comentarios
 
+def obtener_datos_usuario(username):
+    if not os.path.exists('data/users.txt'):
+        return None
+    with open('data/users.txt', 'r', encoding='utf-8') as f:
+        for line in f:
+            parts = line.strip().split('|')
+            if len(parts) == 3 and parts[0] == username:
+                return {
+                    'username': parts[0],
+                    'password': parts[1],  # opcional
+                    'foto': parts[2]
+                }
+    return None
+
+
 # Rutas
 
 @app.route('/')
@@ -119,11 +155,24 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        guardar_usuario(username, password)
-        return redirect(url_for('login'))
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
+        profile_url = request.form.get('profile_url', '').strip()
+
+        if not username or not password:
+            return render_template('register.html', error="Todos los campos son obligatorios.")
+
+        if usuario_existe(username):
+            return render_template('register.html', error="El nombre de usuario ya está en uso.")
+
+        guardar_usuario(username, password, profile_url)
+
+        # Autologin
+        session['user'] = username
+        return redirect(url_for('index')) 
+
     return render_template('register.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -152,8 +201,9 @@ def new_post():
     if request.method == 'POST':
         titulo = request.form['titulo']
         contenido = request.form['contenido']
+        carrera = request.form['carrera']
         autor = session['user']
-        guardar_post(titulo, contenido, autor)
+        guardar_post(titulo, contenido, autor, carrera)
         return redirect(url_for('index'))
     return render_template('new_post.html')
 
@@ -172,7 +222,19 @@ def ver_post(post_id):
         return redirect(url_for('ver_post', post_id=post_id))
 
     comentarios = cargar_comentarios(post_id)
-    return render_template('post.html', post=post, comentarios=comentarios)
+
+    # Obtener foto del autor del post
+    autor_info = obtener_datos_usuario(post['autor'])
+    foto_autor = autor_info['foto'] if autor_info else None
+
+    # Obtener foto para cada comentarista
+    for c in comentarios:
+        info = obtener_datos_usuario(c['autor'])
+        c['foto'] = info['foto'] if info else url_for('static', filename='user.webp')
+
+    return render_template('post.html', post=post, comentarios=comentarios, foto_autor=foto_autor)
+
+
 
 @app.route('/perfil/<username>')
 def perfil(username):
@@ -234,8 +296,41 @@ def upload_admin_config():
             <input type="submit" value="Aplicar configuración">
         </form>
     '''
+@app.route("/carreras")
+def carreras():
+    carreras_disponibles = [
+        "Primer Año", "Segundo Año", "Electrónica", "Sistemas", 
+        "Mecánica", "Parciales", "Finales", "Apuntes"
+    ]
+    return render_template("carrera.html", carreras=carreras_disponibles)
 
+@app.route("/recursos")
+def recursos():
+    recursos = [
+        {"titulo": "Apuntes Álgebra UTN", "url": "https://example.com/algebra"},
+        {"titulo": "Guía de Finales Física I", "url": "https://example.com/fisica"},
+        {"titulo": "TP Modelos y Simulación", "url": "https://example.com/modelos"},
+    ]
+    return render_template("recursos.html", recursos=recursos)
 
+@app.route("/calendario")
+def calendario():
+    return render_template("calendario.html")
+
+@app.route("/ayuda")
+def ayuda():
+    return render_template("ayuda.html")
+
+@app.route("/buscar")
+def buscar():
+    query = request.args.get("q", "")
+    # lógica real de búsqueda la podés implementar después
+    return render_template("buscar.html", query=query, resultados=[])
+
+@app.route('/carrera/<carrera>')
+def ver_carrera(carrera):
+    posts = [p for p in cargar_posts() if p['carrera'].lower() == carrera.lower()]
+    return render_template('carrera.html', carrera=carrera, posts=posts)
 
 if __name__ == '__main__':
     if not os.path.exists(DATA_DIR):

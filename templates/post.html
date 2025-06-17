@@ -1,21 +1,71 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{ post['titulo'] }}</h2>
-<p>{{ post['contenido'] }}</p>
-<p><small>Publicado por 
-    <a href="{{ url_for('perfil', username=post['autor']) }}">
-        {{ post['autor'] }}
-    </a> el {{ post['timestamp'] }}
-</small></p>
+
+<style>
+.perfil-post, .comentario-box {
+    display: flex;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+}
+.perfil-info {
+    width: 200px;
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 10px;
+}
+.perfil-info img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.perfil-info small {
+    display: block;
+    color: #666;
+}
+.mensaje {
+    padding: 15px;
+    flex-grow: 1;
+}
+.mensaje h2 {
+    margin-top: 0;
+}
+
+</style>
+
+<div class="perfil-post">
+    <div class="perfil-info">
+        <img src="{{ foto_autor }}" alt="Avatar"
+             onerror="this.src='{{ url_for('static', filename='user.webp') }}'">
+        <strong>{{ post['autor'] }}</strong>
+        <small><a href="{{ url_for('perfil', username=post['autor']) }}">Ver perfil</a></small>
+        <small>Publicado el {{ post['timestamp'] }}</small>
+    </div>
+    <div class="mensaje">
+        <h2>{{ post['titulo'] }}</h2>
+        <p><em>Categoría: <a href="{{ url_for('ver_carrera', carrera=post['carrera']) }}">{{ post['carrera'] | title }}</a></em></p>
+        <p>{{ post['contenido'] }}</p>
+    </div>
+</div>
 
 <hr>
 <h3>Comentarios:</h3>
 {% if comentarios %}
     {% for c in comentarios %}
- <div class="post">
-        <p>{{ c['comentario']|safe }}</p>
-        <p><small>Por <a href="{{ url_for('perfil', username=c['autor']) }}">{{ c['autor'] }}</a> el {{ c['timestamp'] }}</small></p>
-    </div>
+        <div class="comentario-box">
+            <div class="perfil-info">
+                <img src="{{ c['foto'] }}" alt="Avatar" class="img_com"
+                     onerror="this.src='{{ url_for('static', filename='user.webp') }}'">
+                <strong>{{ c['autor'] }}</strong>
+                <small><a href="{{ url_for('perfil', username=c['autor']) }}">Ver perfil</a></small>
+                <small>{{ c['timestamp'] }}</small>
+            </div>
+            <div class="mensaje">
+                <p>{{ c['comentario']|safe }}</p>
+            </div>
+        </div>
     {% endfor %}
 {% else %}
     <p>No hay comentarios aún.</p>
@@ -25,7 +75,7 @@
 <hr>
 <h3>Agregar Comentario:</h3>
 <form method="POST">
-    <textarea name="comentario" rows="4" required></textarea><br>
+    <textarea name="comentario" rows="4" required style="width: 100%;"></textarea><br>
     <input type="submit" value="Comentar">
 </form>
 {% else %}

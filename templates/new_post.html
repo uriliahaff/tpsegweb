@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Nuevo Post</h2>
-<form method="POST">
+<form method="POST" action="{{ url_for('new_post') }}">
     <label>Título:</label>
     <input type="text" name="titulo" required>
 
     <label>Contenido:</label>
     <textarea name="contenido" rows="8" required></textarea>
+
+    <label>Carrera:</label>
+    <select name="carrera" required>
+        <option value="">-- Seleccioná una carrera --</option>
+        <option value="informatica">Ingeniería en Informática</option>
+        <option value="electronica">Ingeniería Electrónica</option>
+        <option value="civil">Ingeniería Civil</option>
+        <option value="industrial">Ingeniería Industrial</option>
+        <option value="mecanica">Ingeniería Mecánica</option>
+        <option value="electrica">Ingeniería Eléctrica</option>
+        <option value="quimica">Ingeniería Química</option>
+        <option value="aeronautica">Ingeniería Aeronáutica</option>
+        <option value="naval">Ingeniería Naval</option>
+        <option value="textil">Ingeniería Textil</option>
+    </select>
 
     <input type="submit" value="Publicar">
 </form>

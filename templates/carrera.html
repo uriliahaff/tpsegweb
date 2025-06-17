@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Posts de {{ carrera|capitalize }}</h2>
+
+{% if posts %}
+    <ul>
+    {% for post in posts %}
+    <div class="post">
+        <h3><a href="{{ url_for('ver_post', post_id=post['id']) }}">{{ post['titulo'] }}</a></h3>
+        <p>{{ post['contenido'][:50] }}...</p>
+        <p><small>Publicado por 
+            <a href="{{ url_for('perfil', username=post['autor']) }}">
+                {{ post['autor'] }}
+            </a> 
+            el {{ post['timestamp'] }}
+        </small></p>
+    </div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay publicaciones todavía en esta carrera.</p>
+{% endif %}
+{% endblock %}

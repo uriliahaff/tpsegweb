@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Registro de Usuario</h2>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
 <form method="POST">
-    <label>Nombre de usuario:</label>
-    <input type="text" name="username" required>
+    <label>Nombre de usuario:</label><br>
+    <input type="text" name="username" required><br><br>
     
-    <label>Contraseña:</label>
-    <input type="password" name="password" required>
+    <label>Contraseña:</label><br>
+    <input type="password" name="password" required><br><br>
+    
+    <label>URL de imagen de perfil:</label><br>
+    <input type="url" name="profile_url" placeholder="https://..."><br><br>
     
     <input type="submit" value="Registrarse">
 </form>

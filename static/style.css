@@ -38,7 +38,7 @@ h1, h2 {
     color: #003366;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"],input[type="url"], textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -68,4 +68,95 @@ footer {
     font-size: 0.8em;
     margin-top: 20px;
     color: #777777;
+}
+
+nav {
+    background-color: #cfcfcf;
+    padding: 10px;
+}
+
+nav .nav-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+}
+
+nav .nav-container a {
+    color: #0000cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav .categoria-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+nav .categoria-dropdown select {
+    padding: 4px 6px;
+    border: 1px solid #888;
+    background-color: #f0f0f0;
+    font-family: Tahoma, sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+
+nav form.search-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+nav .search-form input[type="text"] {
+    padding: 4px 6px;
+    border: 1px solid #999;
+    background-color: #f4f4f4;
+    font-size: 0.9em;
+    color: #333;
+    width: 150px;
+    font-family: Arial, sans-serif;
+}
+
+nav .search-form button {
+    padding: 4px 8px;
+    border: 1px solid #999;
+    background-color: #d0d0d0;
+    color: black;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-family: Tahoma, sans-serif;
+}
+
+nav .search-form button:hover {
+    background-color: #c0c0c0;
+    border-color: #666;
+}
+
+
+.categoria-dropdown {
+    margin: 10px 0;
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.categoria-dropdown label {
+    margin-right: 8px;
+}
+
+.categoria-dropdown select {
+    padding: 4px 6px;
+    border: 1px solid #888;
+    background-color: #f0f0f0;
+    font-family: Tahoma, sans-serif;
+    font-size: 13px;
+    color: #000;
 }
