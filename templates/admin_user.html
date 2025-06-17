@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Vista administrativa del usuario: {{ username }}</h2>
+<p>Contraseña: <strong>{{ user['password'] }}</strong></p>
+<p>Avatar: <img src="{{ user['avatar'] }}" width="100"></p>
+{% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
 from datetime import datetime
+import pickle
 
 app = Flask(__name__)
 app.secret_key = 'clave-super-secreta-insegura'
@@ -200,6 +201,40 @@ def borrar_post(post_id):
         return "Acceso denegado", 403
     eliminar_post(post_id)
     return redirect(url_for('admin_panel'))
+
+@app.route('/admin/user/<username>')
+def ver_usuario_admin(username):
+    usuarios = cargar_usuarios()
+    if username not in usuarios:
+        return "Usuario no encontrado", 404
+
+    # 🔐 Control de acceso basado en sesión
+    if session.get('user') != 'admin':
+        return "Acceso no autorizado", 403
+
+    user = usuarios[username]
+    return render_template('admin_user.html', username=username, user=user)
+
+@app.route('/admin/upload_config', methods=['GET', 'POST'])
+def upload_admin_config():
+    if session.get('user') != 'admin':
+        return "Acceso denegado", 403
+    
+    if request.method == 'POST':
+        archivo = request.files['config']
+        if archivo:
+            datos = archivo.read()
+            config = pickle.loads(datos) 
+            return f"Configuración aplicada: {config}"
+    
+    return '''
+        <h2>Subir configuración del sistema</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="config" required>
+            <input type="submit" value="Aplicar configuración">
+        </form>
+    '''
+
 
 
 if __name__ == '__main__':
