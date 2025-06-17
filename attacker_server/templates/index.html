@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Stolen Cookies - Attacker Console</title>
+    <title>💀 Attacker Console 💀</title>
     <style>
         body {
             background-color: #000000;
@@ -10,29 +10,66 @@
             font-family: 'Courier New', Courier, monospace;
             padding: 20px;
         }
+
         h1 {
             color: #FF0000;
             text-shadow: 0 0 5px #FF0000;
         }
+
         .cookie-entry {
             margin-bottom: 10px;
             border-bottom: 1px solid #00FF00;
             padding-bottom: 5px;
         }
+
         .timestamp {
             color: #999999;
             font-size: 12px;
         }
+
         .header {
             margin-bottom: 30px;
         }
+
         .blinker {
             animation: blink 1s steps(2, start) infinite;
         }
+
         @keyframes blink {
             to {
                 visibility: hidden;
             }
+        }
+
+        .terminal {
+            background-color: #001100;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #00FF00;
+            margin-bottom: 30px;
+        }
+
+        .directory-listing {
+            margin-top: 30px;
+        }
+
+        .directory-listing ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .directory-listing li {
+            margin-bottom: 5px;
+        }
+
+        a {
+            color: #00FF00;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -43,7 +80,12 @@
         <hr>
     </div>
 
+    <div class="terminal" id="terminal">
+        <div>> Booting console...</div>
+    </div>
+
     {% if cookies %}
+        <h2>🍪 Stolen Cookies</h2>
         {% for c in cookies %}
             <div class="cookie-entry">
                 <div><strong>Cookie:</strong> {{ c['cookie'] }}</div>
@@ -53,5 +95,37 @@
     {% else %}
         <p>No stolen cookies received yet...</p>
     {% endif %}
+
+    <div class="directory-listing">
+        <h2>📂 Directory Contents</h2>
+        <ul>
+            {% for f in files %}
+                <li><a href="{{ url_for('serve_file',filepath=f) }}" target="_blank">{{ f }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const lines = [
+            ">> Establishing reverse shell...",
+            ">> Injecting JS payload...",
+            ">> Hooking DOM on victim browser...",
+            ">> Bypassing CSP...",
+            ">> Listening on port 4444...",
+            ">> Exfiltrating document.cookie...",
+            ">> Parsing cookies into memory...",
+            ">> Awaiting additional targets..."
+        ];
+
+        let i = 0;
+        setInterval(() => {
+            const line = lines[Math.floor(Math.random() * lines.length)];
+            const div = document.createElement("div");
+            div.textContent = line;
+            terminal.appendChild(div);
+            terminal.scrollTop = terminal.scrollHeight;
+        }, 1500);
+    </script>
 </body>
 </html>

