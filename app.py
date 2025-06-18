@@ -102,9 +102,9 @@ def guardar_comentario(post_id, autor, comentario):
 def eliminar_post(post_id):
     posts = cargar_posts()
     posts = [p for p in posts if p['id'] != post_id]
-    with open(POSTS_FILE, 'w') as f:
+    with open(POSTS_FILE, 'w', encoding='utf-8') as f:
         for p in posts:
-            f.write(f"{p['titulo']}|{p['contenido']}|{p['autor']}|{p['timestamp']}\n")
+            f.write(f"{p['titulo']}|{p['contenido']}|{p['autor']}|{p['timestamp']}|{p['carrera']}\n")
 
 # Borrar comentario
 def eliminar_comentario(post_id, autor, timestamp):
@@ -268,11 +268,31 @@ def admin_panel():
 
     return render_template('admin.html', usuarios=usuarios, posts=posts, comentarios=comentarios)
 
-@app.route('/borrar_post/<int:post_id>', methods=['POST'])
+@app.route('/borrar_post/<int:post_id>', methods=['POST', 'GET'])  # Oh no, GET allowed too!
 def borrar_post(post_id):
-    if 'user' not in session or session['user'] != 'admin':
-        return "Acceso denegado", 403
-    eliminar_post(post_id)
+    if request.method == 'GET':
+        eliminar_post(post_id)
+        return redirect(url_for('admin_panel'))
+    
+    # "Authentication" that can be bypassed by just knowing the URL
+    if 'user' in session and session['user'] == 'admin':
+        eliminar_post(post_id)
+    else:
+        # Weak error message that reveals too much
+        return f"""<html>
+            <head><title>Error</title></head>
+            <body bgcolor="#FFFFFF">
+                <font face="Verdana" size="2">
+                <center>
+                    <h2>❌ Error 403</h2>
+                    <p>Debes ser admin para borrar posts</p>
+                    <p>Post ID: {post_id}</p>
+                    <a href="/login"><img src="/static/login_button.gif" border="0"></a>
+                </center>
+                </font>
+            </body>
+        </html>""", 403
+    
     return redirect(url_for('admin_panel'))
 
 @app.route('/admin/user/<username>')
@@ -288,25 +308,7 @@ def ver_usuario_admin(username):
     user = usuarios[username]
     return render_template('admin_user.html', username=username, user=user)
 
-@app.route('/admin/upload_config', methods=['GET', 'POST'])
-def upload_admin_config():
-    if session.get('user') != 'admin':
-        return "Acceso denegado", 403
-    
-    if request.method == 'POST':
-        archivo = request.files['config']
-        if archivo:
-            datos = archivo.read()
-            config = pickle.loads(datos) 
-            return f"Configuración aplicada: {config}"
-    
-    return '''
-        <h2>Subir configuración del sistema</h2>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="config" required>
-            <input type="submit" value="Aplicar configuración">
-        </form>
-    '''
+
 @app.route("/carreras")
 def carreras():
     carreras_disponibles = [
