@@ -3,8 +3,10 @@ body {
     background-color: #eeeeee;
     color: #000000;
     margin: 0;
-    padding: 0;
+            padding: 20px;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGD4z0AswK4SAFXuAf8EPy+xAAAAAElFTkSuQmCC');
 }
+
 
 header {
     background-color: #003366;
@@ -67,7 +69,8 @@ footer {
     text-align: center;
     font-size: 0.8em;
     margin-top: 20px;
-    color: #777777;
+    color: black;
+    font-weight: bolder;
 }
 
 nav {

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="search-header">
+    <h2>Resultados de búsqueda</h2>
+    <form action="{{ url_for('buscar') }}" method="get" class="search-form">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar publicaciones...">
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+{% if query %}
+    <div class="search-results">
+        {% if resultados %}
+            <p class="results-count">{{ resultados|length }} resultado{% if resultados|length != 1 %}s{% endif %} encontrados</p>
+            
+            {% for post in resultados %}
+            <div class="post">
+                <h3><a href="{{ url_for('ver_post', post_id=post['id']) }}">
+                    {{ post['titulo'] }}
+                </a></h3>
+                <p>{{ post['contenido']|truncate(150) }}</p>
+                <p class="post-meta">
+                    Publicado por 
+                    <a href="{{ url_for('perfil', username=post['autor']) }}">
+                        {{ post['autor'] }}
+                    </a> 
+                    el {{ post['timestamp'] }}
+                </p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-results">
+                <p>No se encontraron resultados para "{{ query }}"</p>
+            </div>
+        {% endif %}
+    </div>
+{% else %}
+    <div class="no-query">
+        <p>Ingresa un término de búsqueda para encontrar publicaciones</p>
+    </div>
+{% endif %}
+{% endblock %}

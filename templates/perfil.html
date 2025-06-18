@@ -1,11 +1,91 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Perfil de {{ username }}</h2>
-<img src="{{ user['avatar'] }}" alt="Avatar" width="150" height="150">
+<style>
+    h2 {
+        color: #0066cc;
+        text-shadow: 1px 1px 1px #ccc;
+        border-bottom: 2px dashed #0066cc;
+        padding-bottom: 5px;
+    }
+    h3 {
+        color: #cc3300;
+        background-color: #e6e6e6;
+        padding: 5px;
+        border-left: 5px solid #cc3300;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        background-color: #fff;
+        margin-bottom: 5px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+    li:hover {
+        background-color: #f5f5f5;
+    }
+    a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .user-info {
+        background-color: #e6e6e6;
+        padding: 15px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    .stats {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 0.9em;
+    }
+    .stats span {
+        font-weight: bold;
+        color: #cc3300;
+    }
+    .avatar-container {
+        float: left;
+        margin-right: 20px;
+        border: 3px solid #ccc;
+        padding: 3px;
+        background-color: #fff;
+    }
+</style>
+
+<div class="user-info">
+    <div class="avatar-container">
+        <img src="{{ user['avatar'] }}" alt="Avatar" width="150" height="150">
+    </div>
+    <h2>Perfil de {{ username }}</h2>
+    <div class="stats">
+        <p>Miembro desde: <span>{{ user.get('fecha_registro', 'Desconocida') }}</span></p>
+        <p>Publicaciones: <span>{{ posts|length }}</span></p>
+        <p>Comentarios: <span>{{ user.get('comentarios', 0) }}</span></p>
+        <p>Reputación: <span>{{ user.get('reputacion', 'N/A') }}</span></p>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+
 <h3>Publicaciones:</h3>
 <ul>
 {% for post in posts %}
-    <li><a href="{{ url_for('ver_post', post_id=post['id']) }}">{{ post['titulo'] }}</a> ({{ post['timestamp'] }})</li>
+    <li>
+        <a href="{{ url_for('ver_post', post_id=post['id']) }}">{{ post['titulo'] }}</a>
+        <span style="color: #666; font-size: 0.8em;">({{ post['timestamp'] }})</span>
+        <span style="float: right; color: #666;">{{ post.get('vistas', 0) }} 👁️</span>
+    </li>
+{% else %}
+    <li>No hay publicaciones aún.</li>
 {% endfor %}
 </ul>
+
 {% endblock %}

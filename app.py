@@ -35,7 +35,7 @@ def cargar_usuarios():
 def guardar_usuario(username, password, profile_url):
     with open(USERS_FILE, 'a', encoding='utf-8') as f:
         f.write(f"{username}|{password}|{profile_url}\n")
-        
+
 def usuario_existe(username):
     try:
         with open(USERS_FILE, 'r', encoding='utf-8') as f:
@@ -235,16 +235,27 @@ def ver_post(post_id):
     return render_template('post.html', post=post, comentarios=comentarios, foto_autor=foto_autor)
 
 
-
 @app.route('/perfil/<username>')
 def perfil(username):
     usuarios = cargar_usuarios()
     user = usuarios.get(username)
     if not user:
         return "Usuario no encontrado", 404
+    
     posts = cargar_posts()
     user_posts = [p for p in posts if p['autor'] == username]
-    return render_template('perfil.html', username=username, user=user, posts=user_posts)
+    
+    # Calcular comentarios (asumiendo que tienes una función para cargarlos)
+    comentarios = cargar_comentarios()
+    user_comentarios = sum(1 for c in comentarios if c['autor'] == username)
+    
+    # Añadir datos al perfil
+    user['comentarios'] = user_comentarios
+    
+    return render_template('perfil.html', 
+                         username=username, 
+                         user=user, 
+                         posts=user_posts)
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_panel():
@@ -323,9 +334,20 @@ def ayuda():
 
 @app.route("/buscar")
 def buscar():
-    query = request.args.get("q", "")
-    # lógica real de búsqueda la podés implementar después
-    return render_template("buscar.html", query=query, resultados=[])
+    query = request.args.get("q", "").lower()
+    posts = cargar_posts()
+    
+    resultados = []
+    if query:
+        for post in posts:
+            # Search in title, content, and author
+            if (query in post['titulo'].lower() or 
+                query in post['contenido'].lower() or 
+                query in post['autor'].lower() or
+                query in post['carrera'].lower()):
+                resultados.append(post)
+    
+    return render_template("busqueda.html", query=query, resultados=resultados)
 
 @app.route('/carrera/<carrera>')
 def ver_carrera(carrera):
