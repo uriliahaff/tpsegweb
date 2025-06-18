@@ -74,12 +74,102 @@
         a:hover {
             text-decoration: underline;
         }
+
+            body {
+        background: radial-gradient(circle, #001100, #000000);
+        background-attachment: fixed;
+    }
+    
+    h1 {
+        text-shadow: 0 0 10px #FF0000, 0 0 20px #FF0000;
+        animation: pulse 2s infinite alternate;
+    }
+    
+    @keyframes pulse {
+        from { text-shadow: 0 0 5px #FF0000; }
+        to { text-shadow: 0 0 15px #FF0000, 0 0 25px #FF0000; }
+    }
+    
+    .terminal {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .terminal::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px);
+        background-size: 10px 10px;
+        pointer-events: none;
+    }
+    
+    .terminal::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            to bottom,
+            transparent 95%,
+            rgba(0,255,0,0.1)
+        );
+        pointer-events: none;
+        animation: scan 8s linear infinite;
+    }
+    
+    @keyframes scan {
+        0% { top: -100%; }
+        100% { top: 100%; }
+    }
+    
+    .cookie-entry {
+        background: rgba(0,30,0,0.5);
+        padding: 10px;
+        border-left: 3px solid #FF0000;
+        animation: flicker 0.5s infinite alternate;
+    }
+    
+    @keyframes flicker {
+        0% { opacity: 0.8; }
+        100% { opacity: 1; }
+    }
+    
+    .directory-listing li {
+        position: relative;
+        padding-left: 20px;
+    }
+    
+    .directory-listing li::before {
+        content: ">";
+        position: absolute;
+        left: 0;
+        color: #FF0000;
+    }
+    
+    /* Matrix rain effect in background */
+    .matrix-rain {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        opacity: 0.3;
+    }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>💀 Attacker Console 💀</h1>
-        <p>Listening for incoming stolen cookies <span class="blinker">_</span></p>
+        <h1>Attacker Console</h1>
+        <p>Listening for incoming hacked servers <span class="blinker">_</span></p>
         <hr>
     </div>
 
@@ -88,7 +178,7 @@
     </div>
 
     {% if cookies %}
-        <h2>🍪 Stolen Cookies</h2>
+        <h2>Stolen Cookies</h2>
         {% for c in cookies %}
             <div class="cookie-entry">
                 <div><strong>Cookie:</strong> {{ c['cookie'] }}</div>
@@ -100,7 +190,7 @@
     {% endif %}
 
     <div class="directory-listing">
-        <h2>📂 Directory Contents</h2>
+        <h2>Directory Leak</h2>
         <ul>
             {% for f in files %}
                 <li><a href="{{ url_for('serve_file',filepath=f) }}" target="_blank">{{ f }}</a></li>
@@ -161,6 +251,61 @@
 
     setInterval(addLog, 500 + Math.random() * 500); // jittered interval
 </script>
-
+<div class="matrix-rain" id="matrix"></div>
+<script>
+    // Matrix rain effect
+    const canvas = document.createElement('canvas');
+    canvas.className = 'matrix-rain';
+    document.getElementById('matrix').appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
+    
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const rainDrops = [];
+    
+    for (let x = 0; x < columns; x++) {
+        rainDrops[x] = 1;
+    }
+    
+    const draw = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00FF00';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+            
+            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                rainDrops[i] = 0;
+            }
+            rainDrops[i]++;
+        }
+    };
+    
+    setInterval(draw, 30);
+    
+    // Add dramatic sound effects (uncomment if you want sound)
+    // const playSound = () => {
+    //     const sounds = [
+    //         'https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-ambience-2294.mp3',
+    //         'https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-positive-interface-902.mp3'
+    //     ];
+    //     const audio = new Audio(sounds[Math.floor(Math.random() * sounds.length)]);
+    //     audio.volume = 0.2;
+    //     audio.play();
+    // };
+    // setInterval(playSound, 5000);
+</script>
 </body>
 </html>
