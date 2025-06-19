@@ -4,3 +4,48 @@
 0|maleo_96|jajaja, a mi tambien me mato. Me acuerdo que eran 5 a desarollar, entregue en blanco igual....|2025-06-17 19:33:20
 0|juangutierrez|Aca esta las preguntas: <p>1. Explicar tablero de Control</p> 2. Explicar tecnicas de planeamiento</p> <p> 3. V o F. Un ingeniero en sistemas no debe hacerse cargo de las situaciones de Crisis.</p> <p> 4. V o F. Un lider debe ser carismatico para tener exito.</p> <p> 5. V o F. Maslow definio una teoria de simultaneidad de Necesidades.</p>  |2025-06-17 19:48:16
 0|uliahaff|Muchas gracias Juan, te amo <3 =D Salvaste mi a�o|2025-06-17 19:54:26
+2|marce|Alguien entendio algo del final de Redes? No se si fui al mismo examen que los demas.|2025-06-17 20:01:12
+2|uliahaff|Si, el punto de protocolos fue el que mas me costo. Lo resolvi a medias.|2025-06-17 20:03:55
+2|maleo_96|Redes fue un parto. Con suerte saco un 4 y me olvido.|2025-06-17 20:05:14
+3|juangutierrez|Gracias por el apunte, Marce! Estaba buscando algo asi para Industrial.|2025-06-17 20:06:49
+3|marce|De nada! Ojala te sirva, lo use para preparar el final en 2022.|2025-06-17 20:08:21
+1|admin|Acordate de subir las notas cuando terminen de corregir!|2025-06-17 20:09:02
+0|uliahaff|Estaria buenisimo armar un grupo para practicar. Quien se prende?|2025-06-17 20:10:12
+0|maleo_96|+1, podriamos usar Discord. Ya lo usamos con otras materias.|2025-06-17 20:11:30
+0|marce|Si arman el grupo me sumo, estoy re perdido.|2025-06-17 20:12:57
+5|admin|Actualice los links de descarga, deberian andar ahora.|2025-06-17 20:13:44
+5|juangutierrez|Si, ahora si me deja entrar. Gracias!|2025-06-17 20:15:03
+6|uliahaff|Se puede usar calculadora programable en Electronica II?|2025-06-17 20:16:27
+6|marce|Creo que no, Rochinas dijo que solo cientifica simple.|2025-06-17 20:18:06
+6|maleo_96|Confirmo, nada de programables. Lo dijo el ayudante el martes.|2025-06-17 20:19:22
+7|juangutierrez|Comparto resumen de Dinamica, incluye todos los ejercicios de las guias.|2025-06-17 20:20:01
+7|admin|Subilo a Google Drive y pega el link asi queda mas comodo.|2025-06-17 20:21:16
+7|uliahaff|Mil gracias, me viene joya para repasar.|2025-06-17 20:22:37
+8|marce|Che, quien rinde Sistemas Operativos este sabado?|2025-06-17 20:23:41
+8|maleo_96|Yo! Lo estoy preparando con los parciales de anios anteriores.|2025-06-17 20:24:56
+8|juangutierrez|Tenes el parcial del 2022? Me serviria para practicar.|2025-06-17 20:26:11
+9|uliahaff|Ya se puede ver la nota del recuperatorio en SIGA!|2025-06-17 20:27:04
+9|marce|Me saque un 7, zafe. Que estres la espera.|2025-06-17 20:28:15
+9|maleo_96|A mi todavia no me cargo nada, que raro.|2025-06-17 20:29:33
+10|admin|Agregamos una nueva seccion de Apuntes en el foro, chequeenla.|2025-06-17 20:30:47
+10|uliahaff|Que buena idea! Faltaba algo asi para centralizar material.|2025-06-17 20:31:59
+10|juangutierrez|Voy a subir los mios de Termodinamica.|2025-06-17 20:32:41
+11|maleo_96|Alguien sabe si la profe Di Pietro sigue tomando todos los finales orales?|2025-06-17 20:33:50
+11|marce|Si, y es bastante jodida con los temas. Hay que ir bien preparado.|2025-06-17 20:34:58
+11|uliahaff|Recomiendo ir con el libro de Szewczyk subrayado.|2025-06-17 20:36:09
+12|juangutierrez|Se va a tomar la parte de compuertas logicas en el parcial?|2025-06-17 20:37:14
+12|admin|Si, lo confirmaron en clase. Tema 4 completo.|2025-06-17 20:38:21
+13|marce|Subi los finales de Quimica desde 2018, estan todos escaneados.|2025-06-17 20:39:31
+13|maleo_96|Crack! Eso me salva para preparar el segundo parcial.|2025-06-17 20:40:42
+14|uliahaff|Hay que llevar la libreta para firmar la cursada?|2025-06-17 20:41:56
+14|juangutierrez|Si, la firman en el ultimo teorico.|2025-06-17 20:43:02
+15|admin|Recuerden completar la encuesta docente antes del viernes.|2025-06-17 20:44:17
+15|maleo_96|Gracias por el aviso! Me habia olvidado.|2025-06-17 20:45:28
+16|marce|Alguien tiene el link del grupo de Telegram de Electrotecnia?|2025-06-17 20:46:41
+16|uliahaff|Te lo paso por privado, no se si se puede publicar aca.|2025-06-17 20:47:52
+17|juangutierrez|Consegui la guia nueva de Maquinas Electricas, la quieren?|2025-06-17 20:48:58
+17|admin|Si! Subila al drive porfa.|2025-06-17 20:50:07
+18|maleo_96|La clase del martes es presencial o por Zoom?|2025-06-17 20:51:13
+18|marce|Presencial, lo dijeron por campus.|2025-06-17 20:52:26
+19|uliahaff|Que diferencia hay entre las versiones del libro de Fisica 1?|2025-06-17 20:53:44
+19|juangutierrez|La edicion 2022 tiene ejercicios nuevos. Conviene esa.|2025-06-17 20:54:59

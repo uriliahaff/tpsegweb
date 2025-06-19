@@ -356,6 +356,21 @@ def ver_carrera(carrera):
     posts = [p for p in cargar_posts() if p['carrera'].lower() == carrera.lower()]
     return render_template('carrera.html', carrera=carrera, posts=posts)
 
+@app.route('/admin/upload_config', methods=['POST'])
+def upload_admin_config():
+    if session.get('user') != 'admin':
+        return "Acceso denegado", 403
+    
+    if request.method == 'POST':
+        archivo = request.files['config']
+        if archivo:
+            datos = archivo.read()
+            config = pickle.loads(datos) 
+            return render_template('admin.html')
+
+        else: 
+            print("No hay archivo")
+
 if __name__ == '__main__':
     if not os.path.exists(DATA_DIR):
         os.makedirs(DATA_DIR)

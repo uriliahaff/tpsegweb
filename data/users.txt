@@ -3,3 +3,16 @@ uliahaff|segura456|https://imgs.search.brave.com/IxF6egP1_YpKe2SJY5HF0AGrotWm51u
 maleo_96|male|https://imgs.search.brave.com/sFgOkbrvl0hitaAM6shK9UXFiB7PA_KpbRUAk0GxWiY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/d2hhdHMtaW4teW91/ci1vcGluaW9uLXRo/ZS1jb29sZXN0LXBo/b3RvLW9mLXRoZS1i/ZWF0bGVzLXYwLTBt/bm5uM2NqMHVlYzEu/anBlZz93aWR0aD02/MDAmZm9ybWF0PXBq/cGcmYXV0bz13ZWJw/JnM9YzA2YTM1NDAx/NjQ4MzFjOGEyMzc5/NTkzOGU0YjM4NmI1/MjNmZTk2YQ
 juangutierrez|juan|https://imgs.search.brave.com/s5LbKt4xdOGgVGL1jgkmOxgoE3gs4hTZ6cUAuvZKuI4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2I5L2Fi/L2Y5L2I5YWJmOTU5/NWMwMDFkMWEyNTY5/NTE2ZmEzZjgwMWJj/LmpwZw
 marce|marce|https://imgs.search.brave.com/FVa_ljGx-whxT65R1MZCG3ElxvE5IHYWoW8HcSQaOVY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZW5lcy5lbHBhaXMu/Y29tL3Jlc2l6ZXIv/djIvV1BPSVVYRzJB/WFNETkRGQk9DT0kz/Tk5RNFUuanBnP2F1/dGg9NTY4NzEyNmFh/MzA1YjIxNjllZmU2/MzYwODA2YTkxMDIw/ZDBkMThkZDUxZmJk/ZDlhZTBlMmNlOTEw/ZmQyODRmYSZ3aWR0/aD00MTQmaGVpZ2h0/PTMxMSZzbWFydD10/cnVl
+maria_ingeniera|mariapass|https://randomuser.me/api/portraits/women/3.jpg
+tomi_dev|clave123|https://randomuser.me/api/portraits/men/4.jpg
+florencia_qafull|florqa|https://randomuser.me/api/portraits/women/5.jpg
+lucho_data|dataisfun|https://randomuser.me/api/portraits/men/6.jpg
+agus.sysadmin|adminpass|https://randomuser.me/api/portraits/men/7.jpg
+romi_docente|profesorax|https://randomuser.me/api/portraits/women/8.jpg
+nico_backend|backend123|https://randomuser.me/api/portraits/men/9.jpg
+valen_uiux|designlover|https://randomuser.me/api/portraits/women/10.jpg
+franco_ai|machine123|https://randomuser.me/api/portraits/men/11.jpg
+carla_estudiante|carlaest|https://randomuser.me/api/portraits/women/12.jpg
+mati_redes|cisco4life|https://randomuser.me/api/portraits/men/13.jpg
+celeste_pm|proyectate|https://randomuser.me/api/portraits/women/14.jpg
+dario_infra|infra2025|https://randomuser.me/api/portraits/men/15.jpg

@@ -10,19 +10,44 @@
     <h1 style="color: white;">UTN NerdHub - Foro Oficial de Ingeniería y Café ☕</h1>
 </header>
 <nav>
-    <a href="{{ url_for('index') }}">Inicio</a>
-    {% if session.get('user') %}
-        <a href="{{ url_for('new_post') }}">Nuevo Post</a>
-        <a href="{{ url_for('perfil', username=session.get('user')) }}">Perfil</a>
-        {% if session.get('user') == 'admin' %}
-            <a href="{{ url_for('admin_panel') }}">Panel de Admin</a>
+    <div class="nav-container">
+        <a href="{{ url_for('index') }}">Inicio</a>
+
+        <div class="categoria-dropdown">
+            <label for="carrera">Filtrar por carrera:</label>
+            <select id="carrera" name="carrera" onchange="location = this.value;">
+                <option value="#">-- Seleccionar carrera --</option>
+                <option value="{{ url_for('ver_carrera', carrera='informatica') }}">Ingeniería en Sistemas / Informática</option>
+                <option value="{{ url_for('ver_carrera', carrera='electronica') }}">Ingeniería Electrónica</option>
+                <option value="{{ url_for('ver_carrera', carrera='electrica') }}">Ingeniería Eléctrica</option>
+                <option value="{{ url_for('ver_carrera', carrera='civil') }}">Ingeniería Civil</option>
+                <option value="{{ url_for('ver_carrera', carrera='quimica') }}">Ingeniería Química</option>
+                <option value="{{ url_for('ver_carrera', carrera='industrial') }}">Ingeniería Industrial</option>
+                <option value="{{ url_for('ver_carrera', carrera='mecanica') }}">Ingeniería Mecánica</option>
+                <option value="{{ url_for('ver_carrera', carrera='naval') }}">Ingeniería Naval</option>
+                <option value="{{ url_for('ver_carrera', carrera='textil') }}">Ingeniería Textil</option>
+                <option value="{{ url_for('ver_carrera', carrera='aeronautica') }}">Ingeniería Aeronáutica</option>
+            </select>
+        </div>
+
+        {% if session.get('user') %}
+            <a href="{{ url_for('new_post') }}">Nuevo Post</a>
+            <a href="{{ url_for('perfil', username=session.get('user')) }}">Perfil</a>
+            {% if session.get('user') == 'admin' %}
+                <a href="{{ url_for('admin_panel') }}">Panel de Admin</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}">Salir ({{ session.get('user') }})</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Registrarse</a>
         {% endif %}
-        <a href="{{ url_for('logout') }}">Salir ({{ session.get('user') }})</a>
-    {% else %}
-        <a href="{{ url_for('login') }}">Login</a>
-        <a href="{{ url_for('register') }}">Registrarse</a>
-    {% endif %}
+                <form action="{{ url_for('buscar') }}" method="get" class="search-form">
+            <input type="text" name="q" placeholder="Buscar en el foro...">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
 </nav>
+
 
 <div class="container">
     {% block content %}{% endblock %}

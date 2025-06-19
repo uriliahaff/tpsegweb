@@ -1,2 +1,17 @@
 [PEDIDO] Parcial A.G 11/06/2009 |Alguien tiene el parcial tomado por Rochinas el pasado martes??? Graicas =D |uliahaff|2025-06-17 18:47:15|informatica
 [Aporte] [Legislacion] Apunte completo para final|Dejo el apunte que arme para dar el final en Septiembre 2023.<br>Falta la unidad 13, que no la incluí porque me parece un poco innecesaria (y con saber bien todo el resto es más que suficiente). |uliahaff|2025-06-17 22:30:19|informatica
+[PEDIDO] Final Sistemas Operativos julio 2024|Alguien tiene idea qué temas tomó la profe Lombardi en el final pasado? Me quiero preparar bien, gracias.|juangutierrez|2025-06-14 11:20:15|informatica
+[Aporte] Parcial Matematica Discreta|Les dejo el parcial resuelto de discreta de Ledesma, fecha mayo 2024. Muy parecido al de años anteriores.|florencia_qafull|2025-06-12 09:55:03|informatica
+[Consulta] TP Redes|Grupo, ¿alguien sabe si hay que implementar también RIP para el TP o alcanza con OSPF?|tomi_dev|2025-06-13 17:18:45|telecomunicaciones
+[Aporte] [Info II] Apunte estructuras|Comparto un resumen que armé para la cursada de Info II. Incluye diagramas UML y ejemplos de parciales.|maria_ingeniera|2025-06-15 13:22:00|informatica
+[Offtopic] Venta libros usados|Vendo libros de Análisis I y Física I a buen precio. Interesados por DM. Zona Medrano.|agus.sysadmin|2025-06-10 19:05:31|civil
+[PEDIDO] Actas de final|¿Alguien vio ya las actas del final de Legislación de ayer? Supuestamente ya están subidas al SIU.|carla_estudiante|2025-06-16 08:50:12|informatica
+[Aporte] Final AMII Resuelto|Comparto el final resuelto de Análisis Matemático II, Cátedra García. Tomado en febrero 2024.|mati_redes|2025-06-13 21:14:50|mecanica
+[Consulta] [TP BD] Diagrama entidad relación|¿Alguno tiene un ejemplo de DER para una base de datos de hospital? Estoy medio trabado.|lucho_data|2025-06-11 14:43:02|informatica
+[Aporte] Final Teoría de Control|Subo el final tomado en junio 2023. Muy parecido al parcial 2, ojo con la pregunta de la planta inversa.|franco_ai|2025-06-17 10:05:29|electronica
+[PEDIDO] Modelo de examen de Física I|Hola, ¿alguien tiene el modelo de examen que subieron en 2022 para la profe Domínguez? Gracias!|valen_uiux|2025-06-16 16:32:08|mecanica
+[Consulta] Licencia Matlab estudiantil|¿Sigue vigente la licencia gratuita de Matlab para estudiantes de la UTN? No me anda el link.|nico_backend|2025-06-12 12:14:38|informatica
+[Offtopic] ¿Alguien de FRBA juega ajedrez?|Estoy armando un club de ajedrez online para estudiantes UTN. Si te interesa, pasá tu usuario de lichess.|romi_docente|2025-06-14 20:25:11|sistemas
+[Aporte] [Electrotecnia] Apunte completo|Resumen armado en base a clase + libro. Me salvó en el segundo parcial, ojalá les sirva.|celeste_pm|2025-06-15 18:10:27|electrica
+[Consulta] Reentrega TP Final Ing. Software|¿Alguien tuvo que hacer reentrega del TP final de Ingeniería de Software? ¿Qué tan exigente es Raggio?|dario_infra|2025-06-11 22:44:51|informatica
+[PEDIDO] TP modelado de sistemas|Necesito un ejemplo completo de modelado con bloques + simulación en Simulink. Final este sábado!|juangutierrez|2025-06-17 09:05:47|electromecanica
