@@ -257,16 +257,20 @@ def perfil(username):
                          user=user, 
                          posts=user_posts)
 
-@app.route('/admin', methods=['GET', 'POST'])
-def admin_panel():
-    if 'user' not in session or session['user'] != 'admin':
-        return "Acceso denegado", 403
+@app.route('/admin/<adminusername>', methods=['GET', 'POST'])
+def admin_panel(adminusername):
+    if (
+        'user' not in session or
+        session['user'] not in ['admin', 'admin2', 'masteradmin'] or
+        adminusername not in ['admin', 'admin2', 'masteradmin']
+    ):
+        return redirect(url_for('index'))
 
     usuarios = cargar_usuarios()
     posts = cargar_posts()
     comentarios = cargar_comentarios()
 
-    return render_template('admin.html', usuarios=usuarios, posts=posts, comentarios=comentarios)
+    return render_template('admin.html', usuarios=usuarios, posts=posts, comentarios=comentarios, adminusername=adminusername)
 
 @app.route('/borrar_post/<int:post_id>', methods=['POST', 'GET'])  # Oh no, GET allowed too!
 def borrar_post(post_id):

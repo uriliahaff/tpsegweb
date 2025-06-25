@@ -34,7 +34,7 @@
             <a href="{{ url_for('new_post') }}">Nuevo Post</a>
             <a href="{{ url_for('perfil', username=session.get('user')) }}">Perfil</a>
             {% if session.get('user') == 'admin' %}
-                <a href="{{ url_for('admin_panel') }}">Panel de Admin</a>
+                <a href="{{ url_for('admin_panel',adminusername=session.get('user')) }}">Panel de Admin</a>
             {% endif %}
             <a href="{{ url_for('logout') }}">Salir ({{ session.get('user') }})</a>
         {% else %}
