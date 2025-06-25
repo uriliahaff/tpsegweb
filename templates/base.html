@@ -33,7 +33,7 @@
         {% if session.get('user') %}
             <a href="{{ url_for('new_post') }}">Nuevo Post</a>
             <a href="{{ url_for('perfil', username=session.get('user')) }}">Perfil</a>
-            {% if session.get('user') == 'admin' %}
+            {% if session.get('user') == 'admin' or session.get('user') == 'admin2' or session.get('user') == 'masteradmin' %}
                 <a href="{{ url_for('admin_panel',adminusername=session.get('user')) }}">Panel de Admin</a>
             {% endif %}
             <a href="{{ url_for('logout') }}">Salir ({{ session.get('user') }})</a>
