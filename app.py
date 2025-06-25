@@ -360,10 +360,14 @@ def ver_carrera(carrera):
     posts = [p for p in cargar_posts() if p['carrera'].lower() == carrera.lower()]
     return render_template('carrera.html', carrera=carrera, posts=posts)
 
-@app.route('/admin/upload_config', methods=['POST'])
-def upload_admin_config():
-    if session.get('user') != 'admin':
-        return "Acceso denegado", 403
+@app.route('/admin/<adminusername>/upload_config', methods=['POST'])
+def upload_admin_config(adminusername):
+    if (
+        'user' not in session or
+        session['user'] not in ['admin', 'admin2', 'masteradmin'] or
+        adminusername not in ['admin', 'admin2', 'masteradmin']
+    ):
+        return redirect(url_for('index'))
     
     if request.method == 'POST':
         archivo = request.files['config']
